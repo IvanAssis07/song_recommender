@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ivanassis-song-recommender-service
+spec:
+  selector:
+    app: ivanassis-song-recommender
+  ports:
+    - protocol: TCP
+      port: 52033       
+      targetPort: 52033
