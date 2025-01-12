@@ -3,8 +3,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: project2-pvc-ivanassis
   namespace: ivanassis
-  labels:
-    type: local
 spec:
   accessModes:
     - ReadWriteMany
@@ -14,4 +12,4 @@ spec:
   storageClassName: default-storage-class
   selector:
     matchLabels:
-      namespace: ivanassis
+      type: local
