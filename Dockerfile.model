@@ -1,0 +1,11 @@
+FROM python:3.9-slim-bullseye
+
+WORKDIR /app
+
+RUN pip install --no-cache-dir pandas fpgrowth_py pickle-mixin
+
+COPY model.py .
+
+COPY datasets /app/datasets/
+
+CMD ["python", "model.py"]

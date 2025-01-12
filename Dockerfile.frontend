@@ -1,0 +1,11 @@
+FROM python:3.9-slim-bullseye
+
+WORKDIR /app
+
+RUN pip install --no-cache-dir flask pickle-mixin
+
+COPY server_api.py .
+
+EXPOSE 52033
+
+CMD ["python", "server_api.py"]
