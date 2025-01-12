@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: project2-pvc-ivanassis
+  namespace: ivanassis
+  labels:
+    type: local
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: default-storage-class
+  selector:
+    matchLabels:
+      namespace: ivanassis
