@@ -18,9 +18,19 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 52033
+        volumeMounts:
+        - name: shared-volume
+          mountPath: /app/shared
       - name: model
         image: quay.io/ivan_assis/model:latest
         imagePullPolicy: Always
         env:
         - name: DATASET_URL
           value: "https://homepages.dcc.ufmg.br/~cunha/hosted/cloudcomp-2023s2-datasets/2023_spotify_ds1.csv"
+        volumeMounts:
+        - name: shared-volume
+          mountPath: /app/shared
+      volumes:
+      - name: shared-volume
+        persistentVolumeClaim:
+          claimName: project2-pvc-ivanassis
