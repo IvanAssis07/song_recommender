@@ -15,7 +15,7 @@ def rules_generator():
 
     freq_itemsets, rules = fpgrowth(item_set_list, minSupRatio=min_support, minConf=min_confidence)
 
-    with open('rules.pkl', 'wb') as file:
+    with open('shared/rules.pkl', 'wb') as file:
         pickle.dump(rules, file)
 
 if __name__ == '__main__':

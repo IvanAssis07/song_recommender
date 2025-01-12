@@ -13,7 +13,7 @@ def recommend():
     VERSION = "1.0.0"
     MODEL_DATE = datetime.datetime.now().strftime("%Y-%m-%d") # TODO mudar lógica versionamento
 
-    with open("../model/rules.pkl", "rb") as file:
+    with open("shared/rules.pkl", "rb") as file:
         app_model = pickle.load(file)
 
     data = request.get_json(force=True)
