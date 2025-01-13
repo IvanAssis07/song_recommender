@@ -1,6 +1,6 @@
 import pickle
+import os
 from flask import Flask, request, jsonify
-import datetime
 
 app = Flask(__name__)
 
@@ -10,17 +10,18 @@ def hello_world():
 
 @app.route("/api/recommend", methods=['POST'])
 def recommend():
-    VERSION = "1.0.0"
-    MODEL_DATE = datetime.datetime.now().strftime("%Y-%m-%d") # TODO mudar lógica versionamento
-
-    with open("shared/rules.pkl", "rb") as file:
-        app_model = pickle.load(file)
-
     data = request.get_json(force=True)
     user_tracks = data.get('songs', [])
+    version = os.getenv("APP_VERSION", "1.0.0")
 
     if not isinstance(user_tracks, list) or not all(isinstance(song, str) for song in user_tracks):
         return jsonify({"Error": "Invalid input. 'songs' should be a list of strings."}), 400
+
+    with open("shared/rules.pkl", "rb") as file:
+        metadata = pickle.load(file)
+
+    app_model = metadata["rules"]
+    model_date = metadata["updated_at"]
     
     recommendations = []
     for row in app_model:
@@ -30,10 +31,13 @@ def recommend():
 
     recommendations = list(set(recommendations))
 
+    if not recommendations:
+        recommendations = ["Hey Mama", "No Faith in Brooklyn (feat. Jhameel)", "Not Today", "Love You Goodbye", "Bonfire"]
+
     return jsonify({
         'songs': recommendations,
-        'version': VERSION,
-        'model_date': MODEL_DATE
+        'version': version,
+        'model_date': model_date
     })
 
 

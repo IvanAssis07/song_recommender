@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ivanassis-song-recommender-service
+  namespace: ivanassis
 spec:
   selector:
     app: ivanassis-song-recommender
