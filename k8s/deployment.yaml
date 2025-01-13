@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: ivanassis-song-recommender-deployment
 spec:
-  replicas: 5
+  replicas: 10
   selector:
     matchLabels:
       app: ivanassis-song-recommender
@@ -20,7 +20,7 @@ spec:
         - containerPort: 52033
         env:
         - name: APP_VERSION
-          value: "1.0.2"
+          value: "1.0.3"
         volumeMounts:
         - name: shared-volume
           mountPath: /app/shared
