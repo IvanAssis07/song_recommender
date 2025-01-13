@@ -20,12 +20,12 @@ spec:
         - containerPort: 52033
         env:
         - name: APP_VERSION
-          value: "1.0.5"
+          value: "1.0.6"
         volumeMounts:
         - name: shared-volume
           mountPath: /app/shared
       - name: model
-        image: quay.io/ivan_assis/model:0.4
+        image: quay.io/ivan_assis/model:0.5
         imagePullPolicy: Always
         env:
         - name: DATASET_URL
